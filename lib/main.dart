@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:phonebook/card.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
@@ -8,6 +11,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
 
   // This widget is the root of your application.
   @override
@@ -57,6 +61,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  final numberPhone = '+38093468222';
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -67,44 +73,25 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.white, fontWeight: FontWeight.bold)),
           ),
         ),
-        body: Center(child: buildButton()
-            // mainAxisAlignment: MainAxisAlignment.center,
-            ),
+        body: ListView.builder(
+          itemCount: 15,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CardList(cardInfo: numberPhone, count: '$index',)
+                  //cardInfo: _listOfCards[index],
+                  //onTap: () {},
+                  );
+            },
+        ),
       );
+}
+class CardInfo {
+  final String number;
+  final Int count;
 
-  Widget buildButton() {
-    const number = '+380934682229';
-
-    return ListTile(
-      title: const Text('Super Man'),
-      subtitle: const Text(number),
-      leading: const CircleAvatar(
-        backgroundImage: NetworkImage(
-          'https://olivetc.com.ua/images/photo_2020-06-04_09-08-42.jpg'
-        ),
-      ),
-      trailing: TextButton(
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 12),
-          textStyle: const TextStyle(fontSize: 24),
-          backgroundColor: Colors.blue,
-        ),
-        child: const Text(
-          'Call',
-          style: TextStyle(color: Colors.white),
-        ),
-        onPressed: () async {
-          //indirect phone call
-          final Uri launchUri = Uri(
-            scheme: 'tel',
-            path: number,
-          );
-          await launchUrl(launchUri);
-
-          //direct phone call
-          //     bool? res = await FlutterPhoneDirectCaller.callNumber(number);
-        },
-      ),
-    );
-  }
+  CardInfo({
+    required this.number,
+    required this.count
+  });
 }
