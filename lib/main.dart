@@ -63,6 +63,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController searchController = new TextEditingController();
 
   final numberPhone = '+38093468222';
   @override
@@ -75,16 +76,40 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.white, fontWeight: FontWeight.bold)),
           ),
         ),
-        body: ListView.builder(
-          itemCount: 15,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CardList(cardInfo: numberPhone, count: '$index',)
-                  //cardInfo: _listOfCards[index],
-                  //onTap: () {},
-                  );
-            },
+        body: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(16),
+              child: TextField(
+                controller: searchController,
+                decoration: InputDecoration(
+                  labelText: 'Search',
+                  border: new OutlineInputBorder(
+                    borderSide: new BorderSide(
+                      color: Theme.of(context).primaryColor,
+                    )
+                  ),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 15,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: CardList(cardInfo: numberPhone, count: '$index',)
+                        //cardInfo: _listOfCards[index],
+                        //onTap: () {},
+                        );
+                  },
+              ),
+            ),
+          ],
         ),
       bottomNavigationBar: bottomBar(),
       );
