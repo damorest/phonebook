@@ -5,6 +5,8 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:phonebook/card.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'bottomBar.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -84,6 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
             },
         ),
+      bottomNavigationBar: bottomBar(),
       );
 }
 class CardInfo {
