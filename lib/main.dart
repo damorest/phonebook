@@ -1,10 +1,10 @@
 import 'dart:ffi';
-
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:phonebook/card.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:permission_handler/permission_handler.dart';
 import 'bottomBar.dart';
 
 void main() {
@@ -79,13 +79,13 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: TextField(
                 controller: searchController,
                 decoration: InputDecoration(
                   labelText: 'Search',
-                  border: new OutlineInputBorder(
-                    borderSide: new BorderSide(
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
                       color: Theme.of(context).primaryColor,
                     )
                   ),
@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-      bottomNavigationBar: bottomBar(),
+      bottomNavigationBar: bottomBar(0),
       );
 }
 class CardInfo {

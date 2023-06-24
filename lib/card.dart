@@ -40,6 +40,7 @@ class CardList extends StatelessWidget {
         title: Text('Super Man $count'),
         subtitle: Text(GenerateNumber(number, count)),
         leading: GestureDetector(onTap:() {
+
           Navigator.push(
             context,
             MaterialPageRoute(
