@@ -57,24 +57,7 @@ class _AboutPageState extends State<AboutPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
-                    onTap: () async {
-                      var status = Permission.contacts.status;
-                      if (await status.isDenied) {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return const AlertDialog(
-                              title: Text("Доступ до контактів"),
-                              content: Text("Надайте доступ до контактів"),
-                            );
-                           },
-                        );
-                      };
-
-                      print('status : $status');
-                      // We didn't ask for permission yet or the permission has been denied before but not permanently.
-                    },
-
+                    onTap: () {},
 // You can can also directly ask the permission about its status.
 //               if (await Permission.location.isRestricted) {
 //         print('')
@@ -83,14 +66,13 @@ class _AboutPageState extends State<AboutPage> {
                       child: CircleAvatar(
                         radius: 150,
                         backgroundImage: NetworkImage(
-                          '',
-                          // 'https://olivetc.com.ua/images/photo_2020-06-04_09-08-42.jpg'
+                          'https://olivetc.com.ua/images/photo_2020-06-04_09-08-42.jpg'
                         ),
                       ),
                     ),
                   ),
                 ),
-                Text(
+                const Text(
                   'Super Man ',
                   style: TextStyle(
                     // decoration: TextDecoration.underline,
@@ -100,7 +82,7 @@ class _AboutPageState extends State<AboutPage> {
                     color: Colors.blue,
                   ),
                 ),
-                Text(
+                const Text(
                   '+38093468222',
                   style: TextStyle(
                     // decoration: TextDecoration.underline,
@@ -110,7 +92,7 @@ class _AboutPageState extends State<AboutPage> {
                     color: Colors.black,
                   ),
                 ),
-                Text('Email : example@gmail.com'),
+                const Text('Email : example@gmail.com'),
               ]),
         ),
       ),

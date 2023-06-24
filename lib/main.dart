@@ -14,7 +14,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -66,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController searchController = new TextEditingController();
 
   final numberPhone = '+38093468222';
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -85,10 +85,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 decoration: InputDecoration(
                   labelText: 'Search',
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Theme.of(context).primaryColor,
-                    )
-                  ),
+                      borderSide: BorderSide(
+                    color: Theme.of(context).primaryColor,
+                  )),
                   prefixIcon: Icon(
                     Icons.search,
                     color: Theme.of(context).primaryColor,
@@ -96,30 +95,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 15,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: CardList(cardInfo: numberPhone, count: '$index',)
+            SizedBox(
+              height: 200,
+              child: ListView(
+                  padding: const EdgeInsets.all(8),
+                  //scrollDirection: Axis.horizontal,
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: CardList(
+                          cardInfo: numberPhone,
+                          count: '1',
+                        )
                         //cardInfo: _listOfCards[index],
                         //onTap: () {},
-                        );
-                  },
-              ),
+                        ),
+                  ]),
             ),
           ],
         ),
-      bottomNavigationBar: bottomBar(0),
+        bottomNavigationBar: bottomBar(0),
       );
 }
+
 class CardInfo {
   final String number;
   final Int count;
 
-  CardInfo({
-    required this.number,
-    required this.count
-  });
+  CardInfo({required this.number, required this.count});
 }
