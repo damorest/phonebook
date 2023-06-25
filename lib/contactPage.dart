@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'bottomBar.dart';
+import 'notAllow.dart';
 
 class AboutPage extends StatefulWidget {
   //final SearchResult searchResult;
@@ -57,11 +59,51 @@ class _AboutPageState extends State<AboutPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
-                    onTap: () {},
-// You can can also directly ask the permission about its status.
-//               if (await Permission.location.isRestricted) {
-//         print('')
-//         };
+                    onTap: () async {
+                      PermissionStatus storageStatus = await Permission.storage.request();
+                      if(storageStatus == PermissionStatus.granted) {
+                        final ImagePicker picker = ImagePicker();
+// Pick an image.
+                        final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+                      }if(storageStatus == PermissionStatus.denied) {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Рекомендується надати доступ')));
+                      }if(storageStatus == PermissionStatus.permanentlyDenied){
+                        openAppSettings();
+                      }
+
+
+//                       if (await Permission.storage.request().isGranted) {
+//                         if (!context.mounted) return;
+//                         final ImagePicker picker = ImagePicker();
+// // Pick an image.
+//                         final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+// // Capture a photo.
+// //                       final XFile? photo = await picker.pickImage(source: ImageSource.camera);
+// // // Pick a video.
+// //                       final XFile? galleryVideo =
+// //                           await picker.pickVideo(source: ImageSource.gallery);
+// // // Capture a video.
+// //                       final XFile? cameraVideo = await picker.pickVideo(source: ImageSource.camera);
+// // // Pick multiple images.
+// //                       final List<XFile> images = await picker.pickMultiImage();
+// // // Pick singe image or video.
+// //                       final XFile? media = await picker.pickMedia();
+// // // Pick multiple images and videos.
+// //                       final List<XFile> medias = await picker.pickMultipleMedia();
+//                         // Either the permission was already granted before or the user just granted it.
+//
+//                       }else print('new answer: ${Permission.storage.status.toString()}');
+//                        // else {
+//                       //   if (!context.mounted) return;
+//                       //   Navigator.push(
+//                       //     context,
+//                       //     MaterialPageRoute(
+//                       //       builder: (BuildContext context) => const AllowContacts(),
+//                       //     ),
+//                       //   );
+//                       // };
+                    },
+
                     child: const Center(
                       child: CircleAvatar(
                         radius: 150,
