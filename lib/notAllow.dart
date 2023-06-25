@@ -3,22 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class AllowContacts extends StatefulWidget {
-  //final SearchResult searchResult;
-  //final String newUrlImage;
 
   const AllowContacts({
     super.key,
-    //required this.searchResult,
-  });
+      });
 
   @override
   State<AllowContacts> createState() => _AllowContacts();
 }
 
 class _AllowContacts extends State<AllowContacts> {
-  //late TextEditingController controller;
-  //late SearchResult searchResult2;
-
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +48,6 @@ class _AllowContacts extends State<AllowContacts> {
                         }, child: const Text("Відміна")),
                         ElevatedButton(onPressed: () {
                           openAppSettings();
-                          print('єєєєєєєєєє');
                         }, child: const Text("Налаштування")),
                       ],
                       content: const Text("Надайте дозвіл до контактів"),

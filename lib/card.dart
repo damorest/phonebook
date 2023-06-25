@@ -57,10 +57,8 @@ class CardList extends StatelessWidget {
                   builder: (BuildContext context) => const AllowContacts(),
                 ),
               );
-            }
-            ;
+            };
           },
-          // We didn't ask for permission yet or the permission has been denied before but not permanently.
 
           child: const CircleAvatar(
             backgroundImage: NetworkImage(
