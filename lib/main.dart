@@ -14,27 +14,18 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
+
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -46,25 +37,34 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+    final String title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  final List<CardInfo> _bookUser = [
+    CardInfo(
+      name: 'Super Man',
+      number: '094682229',
+        imageUrl:'https://cdn.pixabay.com/photo/2017/07/06/18/48/superman-2478978_1280.jpg'
+    ),
+    CardInfo(
+      name: 'Valera',
+      number: '06576567229',
+        imageUrl:'https://i.ytimg.com/vi/woSP__TkFHU/maxresdefault.jpg'
+    ),
+    CardInfo(
+      name: 'Oleg Rabota',
+      number: '+309647893309',
+        imageUrl:'https://olivetc.com.ua/images/photo_2020-06-04_09-08-42.jpg'
+    ),
+  ];
   TextEditingController searchController = new TextEditingController();
 
-  final numberPhone = '+38093468222';
+  //final numberPhone = '+38093468222';
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -95,22 +95,28 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 200,
-              child: ListView(
-                  padding: const EdgeInsets.all(8),
-                  //scrollDirection: Axis.horizontal,
-                  children: [
-                    Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: CardList(
-                          cardInfo: numberPhone,
-                          count: '1',
-                        )
-                        //cardInfo: _listOfCards[index],
-                        //onTap: () {},
-                        ),
-                  ]),
+            Expanded(
+              child: SizedBox(
+                //height: 200,
+                child: ListView.builder(
+                    padding: const EdgeInsets.all(8),
+                    //scrollDirection: Axis.horizontal,
+                    itemCount: _bookUser.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      //children: [
+                      return
+                        Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: CardList(name: _bookUser[index].name,
+                              number: _bookUser[index].number,
+                              imageAdress: _bookUser[index].imageUrl,
+                            )
+                          //onTap: () {},
+                        );
+                    }
+                  //  ]
+  ),
+              ),
             ),
           ],
         ),
@@ -120,7 +126,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class CardInfo {
   final String number;
-  final Int count;
+  final String name;
+  final String imageUrl;
 
-  CardInfo({required this.number, required this.count});
+  CardInfo({
+    required this.name,
+    required this.imageUrl,
+    required this.number,
+   });
 }

@@ -11,21 +11,29 @@ import 'main.dart';
 import 'notAllow.dart';
 
 class CardList extends StatelessWidget {
-  final String cardInfo;
-  final String count;
+  //final String cardInfo;
+  //final String count;
+  final String name;
+  final String number;
+  final String imageAdress;
 
   //final VoidCallback onTap;
 
   const CardList({
     Key? key,
-    required this.cardInfo,
-    required this.count,
+    required this.name,
+    required this.number,
+    required this.imageAdress,
+    //required this.cardInfo,
+    //required this.count,
     // required this.onTap
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
-    const number = '+38093468222';
+
+    // number = '+38093468222';
 
     String GenerateNumber(String number, count) {
       return (number + count).toString();
@@ -36,8 +44,8 @@ class CardList extends StatelessWidget {
       padding: const EdgeInsets.all(3.0),
       decoration: BoxDecoration(border: Border.all(color: Colors.blueAccent)),
       child: ListTile(
-        title: Text('Super Man $count'),
-        subtitle: Text(GenerateNumber(number, count)),
+        title: Text(name),
+        subtitle: Text(number),
         leading: GestureDetector(
           onTap: () async {
             if (await Permission.contacts.request().isGranted) {
@@ -60,9 +68,9 @@ class CardList extends StatelessWidget {
             };
           },
 
-          child: const CircleAvatar(
+          child: CircleAvatar(
             backgroundImage: NetworkImage(
-                'https://olivetc.com.ua/images/photo_2020-06-04_09-08-42.jpg'),
+                imageAdress),
           ),
         ),
         trailing: TextButton(
