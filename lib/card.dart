@@ -33,11 +33,6 @@ class CardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    // number = '+38093468222';
-
-    String GenerateNumber(String number, count) {
-      return (number + count).toString();
-    }
 
     return Container(
       margin: const EdgeInsets.all(10.0),
@@ -53,7 +48,11 @@ class CardList extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => const AboutPage(),
+                  builder: (BuildContext context) => AboutPage(
+                    nameContact: name,
+                    numberContact: number,
+                    adressContact: imageAdress,
+                   ),
                 ),
               );
               // Either the permission was already granted before or the user just granted it.
