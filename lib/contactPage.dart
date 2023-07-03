@@ -2,21 +2,34 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:phonebook/main.dart';
 
 import 'bottomBar.dart';
 import 'notAllow.dart';
 
 class AboutPage extends StatefulWidget {
+  final String nameContact;
+  final String numberContact;
+  final String adressContact;
 
   const AboutPage({
     super.key,
+    //required this.cardInfo,
+    required this.nameContact,
+    required this.numberContact,
+    required this.adressContact,
       });
 
   @override
-  State<AboutPage> createState() => _AboutPageState();
+  State<AboutPage> createState() => _AboutPageState(nameContact,numberContact,adressContact);
 }
 
 class _AboutPageState extends State<AboutPage> {
+  final String nameContact;
+  final String numberContact;
+  final String adressContact;
+
+  _AboutPageState(this.nameContact, this.numberContact, this.adressContact);
 
 
   @override
@@ -63,27 +76,27 @@ class _AboutPageState extends State<AboutPage> {
     //
                     },
 
-                    child: const Center(
+                    child: Center(
                       child: CircleAvatar(
                         radius: 150,
                         backgroundImage: NetworkImage(
-                          'https://olivetc.com.ua/images/photo_2020-06-04_09-08-42.jpg'
+                            adressContact,
                         ),
                       ),
                     ),
                   ),
                 ),
-                const Text(
-                  'Super Man ',
-                  style: TextStyle(
+                Text(
+                  nameContact,
+                  style: const TextStyle(
                     fontSize: 33,
                     fontWeight: FontWeight.bold,
                     color: Colors.blue,
                   ),
                 ),
-                const Text(
-                  '+38093468222',
-                  style: TextStyle(
+                Text(
+                  numberContact,
+                  style: const TextStyle(
                       fontSize: 25,
                       color: Colors.black,
                   ),

@@ -61,8 +61,13 @@ class _MyHomePageState extends State<MyHomePage> {
       number: '+309647893309',
         imageUrl:'https://olivetc.com.ua/images/photo_2020-06-04_09-08-42.jpg'
     ),
+    CardInfo(
+        name: 'Olga 150 у.о.',
+        number: '+30923437484',
+        imageUrl:'https://cdn-st2.rtr-vesti.ru/vh/pictures/hd/367/174/1.jpg'
+    ),
   ];
-  TextEditingController searchController = new TextEditingController();
+  TextEditingController searchController = TextEditingController();
 
   //final numberPhone = '+38093468222';
 
