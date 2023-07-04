@@ -1,33 +1,22 @@
 import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'bottomBar.dart';
+import 'cardInfo.dart';
 import 'contactPage.dart';
 import 'main.dart';
 import 'notAllow.dart';
 
 class CardList extends StatelessWidget {
-  //final String cardInfo;
-  //final String count;
-  final String name;
-  final String number;
-  final String imageAdress;
-
-  //final VoidCallback onTap;
+  final CardInfo cardInfo;
+    //final VoidCallback onTap;
 
   const CardList({
     Key? key,
-    required this.name,
-    required this.number,
-    required this.imageAdress,
-    //required this.cardInfo,
-    //required this.count,
-    // required this.onTap
-  }) : super(key: key);
+     required this.cardInfo,
+      }) : super(key: key);
 
 
   @override
@@ -39,8 +28,8 @@ class CardList extends StatelessWidget {
       padding: const EdgeInsets.all(3.0),
       decoration: BoxDecoration(border: Border.all(color: Colors.blueAccent)),
       child: ListTile(
-        title: Text(name),
-        subtitle: Text(number),
+        title: Text(cardInfo.name),
+        subtitle: Text(cardInfo.number),
         leading: GestureDetector(
           onTap: () async {
             if (await Permission.contacts.request().isGranted) {
@@ -48,11 +37,7 @@ class CardList extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => AboutPage(
-                    nameContact: name,
-                    numberContact: number,
-                    adressContact: imageAdress,
-                   ),
+                  builder: (BuildContext context) => AboutPage(cardInfo: cardInfo,),
                 ),
               );
               // Either the permission was already granted before or the user just granted it.
@@ -68,8 +53,7 @@ class CardList extends StatelessWidget {
           },
 
           child: CircleAvatar(
-            backgroundImage: NetworkImage(
-                imageAdress),
+            backgroundImage: Image.asset(cardInfo.imageUrl).image,
           ),
         ),
         trailing: TextButton(
@@ -86,7 +70,7 @@ class CardList extends StatelessWidget {
             //indirect phone call
             final Uri launchUri = Uri(
               scheme: 'tel',
-              path: number,
+              path: cardInfo.number,
             );
             await launchUrl(launchUri);
 

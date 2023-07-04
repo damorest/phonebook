@@ -3,33 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:phonebook/main.dart';
-
 import 'bottomBar.dart';
+import 'cardInfo.dart';
 import 'notAllow.dart';
 
 class AboutPage extends StatefulWidget {
-  final String nameContact;
-  final String numberContact;
-  final String adressContact;
+  final CardInfo cardInfo;
 
   const AboutPage({
     super.key,
-    //required this.cardInfo,
-    required this.nameContact,
-    required this.numberContact,
-    required this.adressContact,
-      });
+    required this.cardInfo,
+          });
 
   @override
-  State<AboutPage> createState() => _AboutPageState(nameContact,numberContact,adressContact);
+  State<AboutPage> createState() => _AboutPageState();
 }
 
 class _AboutPageState extends State<AboutPage> {
-  final String nameContact;
-  final String numberContact;
-  final String adressContact;
-
-  _AboutPageState(this.nameContact, this.numberContact, this.adressContact);
 
 
   @override
@@ -73,21 +63,17 @@ class _AboutPageState extends State<AboutPage> {
                         )
                         );
                       }
-    //
                     },
-
                     child: Center(
                       child: CircleAvatar(
                         radius: 150,
-                        backgroundImage: NetworkImage(
-                            adressContact,
-                        ),
+                        backgroundImage: Image.asset(widget.cardInfo.imageUrl).image,
                       ),
                     ),
                   ),
                 ),
                 Text(
-                  nameContact,
+                  widget.cardInfo.name,
                   style: const TextStyle(
                     fontSize: 33,
                     fontWeight: FontWeight.bold,
@@ -95,7 +81,7 @@ class _AboutPageState extends State<AboutPage> {
                   ),
                 ),
                 Text(
-                  numberContact,
+                  widget.cardInfo.number,
                   style: const TextStyle(
                       fontSize: 25,
                       color: Colors.black,

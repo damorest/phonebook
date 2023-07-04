@@ -6,6 +6,7 @@ import 'package:phonebook/card.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'bottomBar.dart';
+import 'cardInfo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,13 +15,9 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
-
 
     return MaterialApp(
       title: 'Flutter Demo',
@@ -49,27 +46,25 @@ class _MyHomePageState extends State<MyHomePage> {
     CardInfo(
       name: 'Super Man',
       number: '094682229',
-        imageUrl:'https://cdn.pixabay.com/photo/2017/07/06/18/48/superman-2478978_1280.jpg'
+        imageUrl:'images/sm1.jpg'
     ),
     CardInfo(
       name: 'Valera',
       number: '06576567229',
-        imageUrl:'https://i.ytimg.com/vi/woSP__TkFHU/maxresdefault.jpg'
+        imageUrl:'images/maxresdefault.jpg'
     ),
     CardInfo(
       name: 'Oleg Rabota',
       number: '+309647893309',
-        imageUrl:'https://olivetc.com.ua/images/photo_2020-06-04_09-08-42.jpg'
+        imageUrl:'images/SM.jpg'
     ),
     CardInfo(
         name: 'Olga 150 у.о.',
         number: '+30923437484',
-        imageUrl:'https://cdn-st2.rtr-vesti.ru/vh/pictures/hd/367/174/1.jpg'
+        imageUrl:'images/1.jpg'
     ),
   ];
-  TextEditingController searchController = TextEditingController();
-
-  //final numberPhone = '+38093468222';
+  //TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -78,7 +73,10 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Center(
             child: Text(widget.title,
                 style: const TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.bold)),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                ),
+            ),
           ),
         ),
         body: Column(
@@ -86,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               padding: const EdgeInsets.all(16),
               child: TextField(
-                controller: searchController,
+                //controller: searchController,
                 decoration: InputDecoration(
                   labelText: 'Search',
                   border: OutlineInputBorder(
@@ -108,19 +106,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     //scrollDirection: Axis.horizontal,
                     itemCount: _bookUser.length,
                     itemBuilder: (BuildContext context, int index) {
-                      //children: [
                       return
                         Padding(
                             padding: const EdgeInsets.all(5.0),
-                            child: CardList(name: _bookUser[index].name,
-                              number: _bookUser[index].number,
-                              imageAdress: _bookUser[index].imageUrl,
-                            )
-                          //onTap: () {},
+                            child: CardList(cardInfo:
+                               _bookUser[index],
+                            ),
                         );
                     }
-                  //  ]
-  ),
+                    ),
               ),
             ),
           ],
@@ -129,14 +123,4 @@ class _MyHomePageState extends State<MyHomePage> {
       );
 }
 
-class CardInfo {
-  final String number;
-  final String name;
-  final String imageUrl;
 
-  CardInfo({
-    required this.name,
-    required this.imageUrl,
-    required this.number,
-   });
-}
