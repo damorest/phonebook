@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:phonebook/cardInfo.dart';
 
 class ContactCard extends StatelessWidget {
-  //final String cardInfo;
+  final CardInfo newCardInfo;
   //final String count;
   //final VoidCallback onTap;
 
   const ContactCard({
     Key? key,
+    required this.newCardInfo,
     //required this.cardInfo,
     //required this.count,
     // required this.onTap
